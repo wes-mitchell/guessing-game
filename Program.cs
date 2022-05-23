@@ -6,9 +6,8 @@ namespace GuessingGame
   {
     static void Main(string[] args)
     {
-        Console.WriteLine("Yo, can you guess the secret number??? You've got four shots.");
-
-
+        Console.WriteLine("Cann you guess the Secret Number? Choose your difficulty, 1 = \"Easy\" 2 = \"Medium\" 3 = \"Hard\" ");
+        string difficultyResponse = Console.ReadLine();
         for (int i = 0; i < 4; i++) {
         string response = Console.ReadLine();
         Random r = new Random();
@@ -19,7 +18,7 @@ namespace GuessingGame
           Console.WriteLine("Damn, you guessed the secret number!! See you next time. :) ");
           break;
         }
-        else if (int.Parse(response) > SecretNum )
+        else if (int.Parse(response) > SecretNum)
         {
           if (i + 2 <= 4) 
           {
@@ -48,4 +47,8 @@ namespace GuessingGame
   }
 }
 
-// Inform the user if their guess was too high or too low, when they guess incorrectly.
+// Prompt the user for a difficulty level before they are prompted to guess the number.
+// The difficulty level should determine how many guesses the user gets. The difficulty levels should be:
+// Easy - this gives the user eight guesses.
+// Medium - this gives the user six guesses.
+// Hard - this gives the user four guesses.
