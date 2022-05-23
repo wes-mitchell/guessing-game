@@ -8,20 +8,34 @@ namespace GuessingGame
     {
         Console.WriteLine("Yo, can you guess the secret number??? You've got four shots.");
 
+
         for (int i = 0; i < 4; i++) {
         string response = Console.ReadLine();
         Random r = new Random();
         int SecretNum = r.Next(1, 100);
+
         if (int.Parse(response) == SecretNum)
         {
           Console.WriteLine("Damn, you guessed the secret number!! See you next time. :) ");
           break;
         }
-        else
+        else if (int.Parse(response) > SecretNum )
         {
           if (i + 2 <= 4) 
           {
-            Console.WriteLine($"Bummer, try again. Your last guess was ({int.Parse(response)})");
+            Console.WriteLine($"Bummer, try again. Your last guess, ({int.Parse(response)}) was too high.");
+          }  
+
+          if (i + 2 < 5) 
+          {
+            Console.Write($"You've got ({3 - i}) guesses left => ");
+          }
+        }
+        else if (int.Parse(response) < SecretNum)
+        {
+                      if (i + 2 <= 4) 
+          {
+            Console.WriteLine($"Bummer, try again. Your last guess, ({int.Parse(response)}) was too low.");
           }  
 
           if (i + 2 < 5) 
