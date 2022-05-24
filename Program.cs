@@ -6,46 +6,62 @@ namespace GuessingGame
   {
     static void Main(string[] args)
     {
-        Console.WriteLine("Yo, can you guess the secret number??? You've got four shots.");
-
-
-        for (int i = 0; i < 4; i++) {
-        string response = Console.ReadLine();
+        Console.WriteLine("Welcome to the Secret Number game!"); 
+        Console.WriteLine("Choose your difficulty: ");
+        Console.Write("");
+        Console.WriteLine("(1) : Easy");
+        Console.WriteLine("(2) : Medium");
+        Console.WriteLine("(3) : Hard");
+        int diffResponse = int.Parse(Console.ReadLine());
+        int guesses = 0;
         Random r = new Random();
-        int SecretNum = r.Next(1, 100);
+        int secretNum = r.Next(1, 101);
 
-        if (int.Parse(response) == SecretNum)
+        if (diffResponse == 1) 
         {
-          Console.WriteLine("Damn, you guessed the secret number!! See you next time. :) ");
-          break;
+            guesses = 8;
         }
-        else if (int.Parse(response) > SecretNum )
+        else if (diffResponse == 2)
         {
-          if (i + 2 <= 4) 
-          {
-            Console.WriteLine($"Bummer, try again. Your last guess, ({int.Parse(response)}) was too high.");
-          }  
+            guesses = 6;
+        } 
+        else if (diffResponse == 3)
+        {
+            guesses = 4;
+        }
+        else 
+        {
+            Console.WriteLine("Hmmmm, try again next time.");
+        }
 
-          if (i + 2 < 5) 
-          {
-            Console.Write($"You've got ({3 - i}) guesses left => ");
-          }
-        }
-        else if (int.Parse(response) < SecretNum)
+        while (guesses != 0)
         {
-                      if (i + 2 <= 4) 
-          {
-            Console.WriteLine($"Bummer, try again. Your last guess, ({int.Parse(response)}) was too low.");
-          }  
+            Console.Write("Guess the secret number...");
+            int response = int.Parse(Console.ReadLine());
 
-          if (i + 2 < 5) 
-          {
-            Console.Write($"You've got ({3 - i}) guesses left => ");
-          }
+        if (guesses == 1)
+        {
+            Console.WriteLine("");
+            Console.WriteLine($"Try again next time! The Secret Number was {secretNum}");
+            break;
         }
-    };
+        else if (response == secretNum)
+        {
+            Console.WriteLine("Damn, you guessed the secret number!! See you next time. :) ");
+            break;
+        }
+        else if ((response > secretNum) && guesses != 1 )
+        {
+            Console.WriteLine($"Bummer, try again. Your last guess, ( {response} ) was too high.");
+            Console.Write($"You've got ({guesses - 1}) guesses left => ");
+        }  
+        else if ((response < secretNum) && guesses != 1 )
+        {
+            Console.WriteLine($"Bummer, try again. Your last guess, ( {response} ) was too low.");
+            Console.Write($"You've got ({guesses - 1}) guesses left => ");
+        }
+            guesses--;
+        }
+    }
     }
   }
-}
-
-// Inform the user if their guess was too high or too low, when they guess incorrectly.
