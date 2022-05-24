@@ -12,10 +12,12 @@ namespace GuessingGame
         Console.WriteLine("(1) : Easy");
         Console.WriteLine("(2) : Medium");
         Console.WriteLine("(3) : Hard");
+        Console.WriteLine("(4) : Cheater");
         int diffResponse = int.Parse(Console.ReadLine());
-        int guesses = 0;
+        double guesses = 0;
         Random r = new Random();
         int secretNum = r.Next(1, 101);
+        double infinite = double.PositiveInfinity;
 
         if (diffResponse == 1) 
         {
@@ -28,6 +30,10 @@ namespace GuessingGame
         else if (diffResponse == 3)
         {
             guesses = 4;
+        }
+        else if (diffResponse == 4)
+        {
+            guesses = infinite;
         }
         else 
         {
@@ -50,12 +56,12 @@ namespace GuessingGame
             Console.WriteLine("Damn, you guessed the secret number!! See you next time. :) ");
             break;
         }
-        else if ((response > secretNum) && guesses != 1 )
+        else if (response > secretNum)
         {
             Console.WriteLine($"Bummer, try again. Your last guess, ( {response} ) was too high.");
             Console.Write($"You've got ({guesses - 1}) guesses left => ");
         }  
-        else if ((response < secretNum) && guesses != 1 )
+        else if (response < secretNum)
         {
             Console.WriteLine($"Bummer, try again. Your last guess, ( {response} ) was too low.");
             Console.Write($"You've got ({guesses - 1}) guesses left => ");
